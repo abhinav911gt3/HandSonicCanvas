@@ -1,2 +1,4 @@
 # HandSonicCanvas
- SonicCanvas is an AI-powered platform that converts natural hand gestures into live  music and synchronized 3D visuals
+ HandSonicCanvas: A gesture-based music system built with React, MediaPipe, and Tone.js. 
+Users can control instruments (piano, drums, guitar, synth) via browser-based hand gestures.
+
