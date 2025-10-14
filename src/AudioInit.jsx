@@ -20,12 +20,14 @@ const synthWaveforms = [
   { label: "Square", type: "square" }
 ];
 
-// Guitar notes & chords
-const guitarNotes = ["E3", "A3", "D4", "G4", "B4", "E5"];
-const guitarChords = [
-  { label: "G Major", notes: ["G3", "B3", "D4"] },
-  { label: "C Major", notes: ["C4", "E4", "G4"] },
-  { label: "D Major", notes: ["D4", "F#4", "A4"] }
+// Guitar notes (6 strings x 5 frets)
+const guitarStrings = [
+  { string: 6, base: "E3", notes: ["E3", "F3", "F#3", "G3", "G#3"] },  // Low E string
+  { string: 5, base: "A3", notes: ["A3", "A#3", "B3", "C4", "C#4"] },  // A string
+  { string: 4, base: "D4", notes: ["D4", "D#4", "E4", "F4", "F#4"] },  // D string
+  { string: 3, base: "G4", notes: ["G4", "G#4", "A4", "A#4", "B4"] },  // G string
+  { string: 2, base: "B4", notes: ["B4", "C5", "C#5", "D5", "D#5"] },  // B string
+  { string: 1, base: "E5", notes: ["E5", "F5", "F#5", "G5", "G#5"] }   // High E string
 ];
 
 // Piano keys
@@ -157,9 +159,26 @@ export default function AudioInit() {
         </button>
       ))}
 
-      <h2>Guitar</h2>
-      {guitarNotes.map(n => <button key={n} onClick={() => playGuitarNote(n)}>{n}</button>)}
-      {guitarChords.map(c => <button key={c.label} onClick={() => playGuitarChordStrum(c.notes)}>{c.label}</button>)}
+      <h2>Guitar (6 strings x 5 frets)</h2>
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.5em" }}>
+        {guitarStrings.map((stringData) => (
+          <div key={stringData.string} style={{ display: "flex", gap: "0.5em" }}>
+            {stringData.notes.map((note, fret) => (
+              <button 
+                key={note} 
+                onClick={() => playGuitarNote(note)}
+                style={{ 
+                  width: "60px",
+                  background: fret === 0 ? "#c8e6c9" : "#e8eaf6",
+                  padding: "0.5em"
+                }}
+              >
+                {`String ${stringData.string} Fret ${fret}`}
+              </button>
+            ))}
+          </div>
+        ))}
+      </div>
 
       <h2>Piano</h2>
       {pianoKeys.map(n => <button key={n} onClick={() => playPianoNote(n)}>{n}</button>)}
